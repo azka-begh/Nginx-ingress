@@ -1,0 +1,18 @@
+#KOPS Commands:
+kops create cluster --name=k8skops.aab12.xyz --state=s3://kops-s3-k8s-bucket --zones=us-east-2a,us-east-2b --node-count=2 --node-size=t3.small --control-plane-size=t3.medium --dns-zone=k8skops.aab12.xyz --node-volume-size=8 --control-plane-volume-size=8
+kops update cluster --name k8skops.aab12.xyz --yes --state=s3://kops-s3-k8s-bucket --yes --admin
+kops delete cluster --name=k8skops.aab12.xyz --state=s3://kops-s3-k8s-bucket --yes
+
+# Ingress-controller from NGINX:
+
+# HELM:
+helm show values ingress-nginx --repo https://kubernetes.github.io/ingress-nginx
+
+# YAML
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/cloud/deploy.yaml
+
+# AWS Network LoadBalancer
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/aws/deploy.yaml
+
+kubectl get pods -n ingress-nginx
+kubectl get svc -n ingress-nginx
