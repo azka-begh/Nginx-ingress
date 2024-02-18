@@ -1,3 +1,5 @@
+# This is not needed for ingress but if you want to curl your website or test if pods can connect to each other, create this object.
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
